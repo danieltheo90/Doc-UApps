@@ -1,0 +1,56 @@
+<% include ../partials/headerlogin %>
+<body class="hold-transition login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <b>SENTRAL</b>TUKANG</a>
+    </div>
+      <div class="login-box-body">
+        <p class="login-box-msg">Forgot your password?</p>
+				 <form accept-charset="UTF-8" role="form" action="/accounts/forgot" method="post">
+					 <span class="help-block">
+             Email address you use to log in to your account
+             <br>
+             We'll send you an email with instructions to choose a new password.
+           </span>
+            <div>
+              <% if(error && error.length > 0) { %>
+                <div class="alert alert-success alert-dismissable fade in">
+                  <button type="button" class="close" data-dismiss="alert">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+                  </button>
+                  <p><%=error %></p>
+                </div>
+              <% } %>
+
+              <% if(success && success.length > 0) { %>
+                <div class="alert alert-warning alert-dismissable fade in">
+                  <button type="button" class="close" data-dismiss="alert">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+                  </button>
+                  <p><%=success %></p>
+                </div>
+              <% } %>
+            </div>
+            <div class="form-group has-feedback">
+              <input type="email" name="email" class="form-control" placeholder="someone@example.com">
+              <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="row">
+              <div class="col-xs-4 pull-right">
+                <button type="submit" class="btn btn-primary btn-block btn-flat">SEND</button>
+              </div>
+              <!-- /.col -->
+            </div>
+          </form>
+          <!-- /.social-auth-links -->
+          <hr>
+          <a href="/">I already to Login</a><br>
+          <a href="/accounts/register" class="text-center">Register a new membership</a>
+
+        </div>
+        <!-- /.login-box-body -->
+    </div>
+</body>
+<!-- <% include ../partials/footerlogin %> -->

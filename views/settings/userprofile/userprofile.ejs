@@ -1,0 +1,92 @@
+<% include ./partials/navbar %>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+
+    <h1>
+      Setting
+      <small>Company</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="/welcome" data-toggle="tooltip" title="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Company</li>
+    </ol>
+    <br>
+    <div>
+      <% if(error && error.length > 0) { %>
+        <div class="alert alert-danger alert-dismissable fade in">
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+          </button><p><%=error %></p></div>
+      <% } %>
+      <% if(success && success.length > 0) { %>
+        <div class="alert alert-warning alert-dismissable fade in">
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+          </button><p><%= success %>
+        </span></div>
+      <% } %>
+    </div>
+    <div class="box box-default">
+      <div class="box-body">
+        <div class="box-header">
+          <h3 class="box-title">Data Company</h3>
+        <hr>
+        </div>
+          <div class="box-body table-responsive no-padding">
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Company</th>
+                    <th>Departement</th>
+                    <th>Action</th>
+                  </tr>
+              </thead>
+              <tfoot>
+                  <tr>
+                      <th>Username</th>
+                      <th>Email</th>
+                      <th>Role</th>
+                      <th>Company</th>
+                      <th>Departement</th>
+                      <th>Action</th>
+                  </tr>
+              </tfoot>
+              <tbody>
+                <% user.forEach(function(users){ %>
+                 <tr>
+                   <td><%= users.username %></td>
+                   <td><%= users.email %></td>
+                   <td><%= users.role %></td>
+                   <td><%= users.company %></td>
+                   <td><%= users.department %></td>
+                  
+                   <td align="right">
+                     <div class="btn-group">
+                       <form action="/settings/delete-userprofile/<%= users.id %>?_method=DELETE" method="post" id="delete-form">
+                         <% if (title ==='userprofile') {}%>
+                         <a class="btn btn-primary btn-sm" href="/settings/<%=users.id%>/edit-userprofile" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>
+                         <input type="hidden" name="_method" value="DELETE">
+                         <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete"><span class="glyphicon glyphicon-remove"></span>
+                         </button>
+                       </form>
+                     </div>
+                   </td>
+                 </tr>
+                 <% }); %>
+              </tbody>
+            </table>
+          </div>
+          <hr>
+        </div>
+      </div>
+  </section>
+</div>
+
+<% include ./partials/footer %>
+<% include ./partials/datatables %>

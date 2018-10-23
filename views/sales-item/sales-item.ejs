@@ -1,0 +1,189 @@
+
+<% include ./partials/navbar_sales %>
+<link rel="stylesheet" href="/stylesheets/sales.css">
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+
+    <h1>
+      List Product Catalog With Price
+      <small>Item</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="/welcome" data-toggle="tooltip" title="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Item</li>
+    </ol>
+  </section>
+
+    <div>
+      <% if(error && error.length > 0) { %>
+        <div class="alert alert-danger alert-dismissable fade in">
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+          </button><p><%=error %></p></div>
+      <% } %>
+      <% if(success && success.length > 0) { %>
+        <div class="alert alert-warning alert-dismissable fade in">
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+          </button><p><%= success %>
+        </span></div>
+      <% } %>
+    </div>
+
+  <section class="content">
+
+   <div class="row">
+     <div class="col-md-12">
+       <!-- Box Comment -->
+       <div class="box box-widget">
+        <div class="box-header with-border">
+          <h3 class="box-title" style="width:90%;">  <input class="form-control" id="current_filter" style="text-decoration: none; background-color:white;" disabled></h3>
+          <div class="box-tools pull-right">
+            <button class="btn btn-primary btn-sm export-excel" data-toggle="tooltip" title="Export to Excel"><span class="fa  fa-file-excel-o"></span></button>
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+              <i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+      <div class="box-body">
+       <form method="GET" action="/sales_item/" _lpchecked="1" id="form-id"  onsubmit="myFunction()">
+         <div class="box-body no-padding">
+           <table class="table table-condensed" style="width:100%;" border="0">
+             <input type="hidden" name="company" value="<%=company%>" class="form-control allfilters" placeholder="Description">
+             <input type="hidden" name="department" value="<%=department%>" class="form-control allfilters" placeholder="Description">
+             <tr>
+                <th class="bg-default" style="width:20%;">Category Code :
+                  <select name="item_category"  class="form-control select2 allfilters">
+                    <option selected></option>
+                    <% if(category.length > 0) { %>
+                    <% category.forEach(function(categories){ %>
+                      <option value="<%= categories.Code %>"><%= categories.Code %></option>
+                    <%});%>
+                    <%}%>
+                  </select>
+                </th>
+                <th class="bg-default" style="width:20%;">Brand Code :
+                  <select name="item_brand" class="form-control select2 allfilters">
+                    <option selected></option>
+                    <% if(brand.length > 0) { %>
+                    <% brand.forEach(function(brands){ %>
+                      <option value="<%= brands.Code %>"><%= brands.Code %></option>
+                    <%});%>
+                    <%}%>
+                  </select>
+                </th>
+
+                <th class="bg-default" style="width:20%;">Nomor Item :
+                    <input type="text" name="no" class="form-control allfilters" placeholder="No.Item">
+                </th>
+                <th class="bg-default" style="width:20%;">Description :
+                  <input type="text" name="description" class="form-control allfilters" placeholder="Description">
+                </th>
+              </tr>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>
+                  <div class="btn-group pull-right">
+                    <button class="btn btn-primary" id="submit">Process</button>
+                  </div>
+                </th>
+                </tr>
+            </table>
+          </div>
+        </form>
+      </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Box Comment -->
+          <div class="box box-widget">
+              <div class="box-header with-border">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="toggle">
+                                <p class="toggle-row">
+                                  <strong>View as  </strong><span class="fa fa-sort"> </span>
+                                    <a class="view big" href="#" aria-label="Big"><i class="fa fa-th-large adjust-right" aria-hidden="true"></i></a>
+                                    <a class="view grid on" href="#" aria-label="Grid"><i class="fa fa-th adjust-right" aria-hidden="true"></i></a>
+                                    <a class="view list" href="#" aria-label="List"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <!-- Box Comment -->
+                        <div class="box box-widget">
+                          <div class="box-header with-border">
+                            <div class="article-wrapper">
+                                <ul class="view-mode grid">
+                                  <% if(item.length > 0) { %>
+                                    <% item.forEach(function(items){ %>
+                                    <lis>
+                                        <div class="article-container material-box">
+                                                <span class="new-marker"></span>
+                                                <img class="img-responsive" width="100%"  src="/img/<%=company%>/item/<%=items.No_%>[1].jpg" onerror="this.src='/img/noimage.png'" alt="alt">
+                                                <div class="padding-container">
+                                                <p class="category-tag">
+                                                    <span onclick="document.location.href='#'; return false">Kategory</span>
+                                                    <span onclick="document.location.href='#'; return false"><i class="fa fa-bookmark-o"></i></span>
+                                                    <span onclick="document.location.href='#'; return false"><i class="fa fa-share-square"></i></span>
+                                                </p>
+                                                <br>
+                                                <p class="article-main-title" style="font-size: 18px;"><strong><%= items.Description %></strong>&nbsp <%= items.Description2 %></p>
+                                                <p class="article-excerpt" style="font-style: oblique;font-size: 12px;">Item No.<%= items.No %></p>
+                                                  <br>
+                                                <span class="label label-info" style="font-size: 14px;">IDR. <%= items.price.toLocaleString() %> / <%= items.UOM %></span>
+                                                  <br>
+                                                  <br>
+                                                <p>
+                                                  <button type="button" onclick="window.location.href='/sales_item/details/<%=company%>/<%=department%>/<%=items.No_%>'" class="button pull-right"><span class="fa fa-eye"> </span> View More</button>
+                                                  <button type="button" onclick="window.location.href='#'" class="button pull-right"><span class="fa fa-cart-arrow-down"> </span> Add To Cart</button>
+                                                </p>
+                                              </div>
+                                        </div>
+                                    </lis>
+                                    <% }); %>
+                                   <% } %>
+                                </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  function currentFilter(variable){
+  var s = document.getElementById(variable);
+  s.value = window.location.search.replace("?", '');
+  }
+  currentFilter("current_filter");
+
+$('.export-excel').click(function() {
+    url = window.location.search.replace("?", '');
+    window.location.href = "http://localhost/sales_item/excel/?"+url;
+
+});
+</script>
+
+  <script src="/scripts/purchase.js"></script>
+  <% include ./partials/footer %>
+  <% include ./partials/datatables %>

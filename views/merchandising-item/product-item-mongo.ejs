@@ -1,0 +1,175 @@
+<% include ./partials/navbar_md %>
+<link rel="stylesheet" href="/stylesheets/md.css">
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+
+    <h1>
+      List Product Catalog With Price
+      <small>Item</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="/welcome" data-toggle="tooltip" title="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Item</li>
+    </ol>
+  </section>
+
+    <div>
+      <% if(error && error.length > 0) { %>
+        <div class="alert alert-danger alert-dismissable fade in">
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+          </button><p><%=error %></p></div>
+      <% } %>
+      <% if(success && success.length > 0) { %>
+        <div class="alert alert-warning alert-dismissable fade in">
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+          </button><p><%= success %>
+        </span></div>
+      <% } %>
+    </div>
+    <br>
+
+   <div class="row">
+     <div class="col-md-12">
+       <!-- Box Comment -->
+       <div class="box box-widget">
+        <div class="box-header with-border">
+          <p class="box-title" style="width:90%;"><input class="form-control input1" id="current_filter" style="background-color:white;" disabled></p>
+          <div class="pull-right">
+            <!-- <button class="btn btn-primary btn-sm export-excel" data-toggle="tooltip" title="Export to Excel"><span class="fa  fa-file-excel-o"></span></button> -->
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+      <div class="box-body">
+       <form method="GET" action="/merchandising_item/product_item_mongodb" _lpchecked="1" id="form-id"  onsubmit="myFunction()">
+         <div class="box-body no-padding">
+          <input type="hidden" name="company" value="<%=company%>" class="form-control allfilters" placeholder="Description">
+          <input type="hidden" name="deptCode" value="<%=department%>" class="form-control allfilters" placeholder="Description">
+
+            <div class="col-md-6">
+             <div class="form-group">
+               <label></label>
+               <select class="form-control select2" name="ItemCategory"  multiple="multiple" data-placeholder="Select a category"
+                       style="width: 100%;border-radius:10px;">
+                 <% if(category.length > 0) { %>
+                 <% category.forEach(function(categories){ %>
+                   <option value="<%= categories.Code %>"><%= categories.Code %></option>
+                 <%});%>
+                 <%}%>
+               </select>
+             </div>
+            </div>
+
+            <div class="col-md-5">
+             <div class="form-group">
+               <label></label>
+               <select class="form-control select2" name="ManufactureCode" multiple="multiple" data-placeholder="Select a Brand"
+                       style="width: 100%;">
+                <% if(brand.length > 0) { %>
+                <% brand.forEach(function(brands){ %>
+                  <option value="<%= brands.Code %>"><%= brands.Code %></option>
+                <%});%>
+                <%}%>
+               </select>
+             </div>
+            </div>
+            <div class="col-md-1">
+              <div class="form-group pull-left">
+                <label></label>
+                <br>
+                <button class="btn btn-primary" id="submit"><span class="fa fa-search"></span></button>
+            </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Box Comment -->
+          <div class="box box-widget">
+            <div class="box-header with-border">
+              <div class="box-body table-responsive no-padding">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th class="pull-right">Filter</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <% if(item) { %>
+                    <% if(item.length > 0) { %>
+                      <% item.forEach(function(items){ %>
+                       <tr>
+                          <td>
+                              <div class="products products-table">
+                                <div class="product">
+                                  <div class="product-img">
+                                    <img class="image img-responsive pull-left" src="/img/<%=company%>/item/<%=items.No_%>[1].jpg" onerror="this.src='/img/No-image-available.jpg'" alt="alt">
+                                  </div>
+                                  <div class="product-content">
+                                    <small style="font-style:italic;">Item No.<%= items.No %></small>
+                                    <br>
+                                    <h3>
+                                      <%= items.Description %>
+                                      <small><%= items.Description2 %></small>
+                                    </h3>
+                                    <p class="product-text price">IDR. <%= items.price.toLocaleString() %> /<%= items.UOM %></p>
+                                    <p class="product-text genre">Stock Tersedia : <%= items.actualStock %></p>
+                                  </div>
+                                </div>
+                              </div>
+                          </td>
+                      </tr>
+                      <% }); %>
+                     <% } %>
+                  <% } %>
+                  </tbody>
+                </table>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+$(function () {
+  $('.select2').select2()
+})
+
+  function currentFilter(variable){
+  var s = document.getElementById(variable);
+  s.value = window.location.search.replace("?company=", '')
+  .replace("&deptCode=",' / ')
+  .replace("&ItemCategory=",' / ')
+  .replace("&ItemCategory=",' / ')
+  .replace("&ItemCategory=",' / ')
+  .replace("&ItemCategory=",' / ')
+  .replace("&ManufactureCode=",' / ')
+  .replace("&ManufactureCode=",' / ')
+  .replace("&ManufactureCode=",' / ')
+  .replace("&ManufactureCode=",' / ')
+  ;
+  }
+  currentFilter("current_filter");
+
+$('.export-excel').click(function() {
+    url = window.location.search.replace("?", '');
+    window.location.href = "http://localhost.8000/sales_item/excel/?"+url;
+
+});
+</script>
+
+  <script src="/scripts/purchase.js"></script>
+  <% include ./partials/footer %>
+  <% include ./partials/datatables %>

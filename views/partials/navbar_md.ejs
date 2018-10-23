@@ -1,0 +1,37 @@
+<% include ../partials/header %>
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+<!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <br>
+    <ul class="sidebar-menu" data-widget="tree" id="halo">
+      <li <% if (title ==='md') {%> class="active treeview" <%}%>>
+        <a href="/dashboard_merchandising">
+          <i class="fa fa-home"></i> <span>Home</span>
+          <!--<span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>-->
+        </a>
+        <!-- <ul class="treeview-menu">
+          <li  <% if (title ==='md') {%> class="active"<%}%>><a href="/dashboard_md"> Dashboard Role MD</a></li>
+        </ul> -->
+      </li>
+      <hr>
+      <li <% if (title ==='product-item') {%> class="active"<%}%> ><a href="/merchandising_item/product_item" ><i class="fa fa-archive" ></i><span>Products</span></a></li>
+      <li <% if (title ==='product-item-mongoo') {%> class="active"<%}%> ><a href="/merchandising_item/product_item_mongodb" ><i class="fa fa-archive" ></i><span>Products MongooDb</span></a></li>
+      <li <% if (title ==='md-item') {%> class="active"<%}%> ><a href="/merchandising_item"><i class="fa fa-image"></i><span>Upload Image</span></a></li>
+      <li <% if (title ==='md-item-card') {%> class="active"<%}%> ><a href="/merchandising_item/merchandising_item_card"><i class="fa  fa-puzzle-piece" ></i><span>Item Card</span></a></li>
+      <li <% if (title ==='md-item-sku') {%> class="active"<%}%> ><a href="/merchandising_item/item_card_sku"><i class="fa fa-area-chart"></i><span>Item SKU</span></a></li>
+      <li <% if (title ==='md-item-replenishment') {%> class="active"<%}%> ><a href="/merchandising_item/item_card_replenishment"><i class="fa fa-suitcase"></i><span>Replenishment</span></a></li>
+      <li><a href="#"><i class="fa fa-cart-arrow-down"></i><span>Purchase Order</span></a></li>
+    </ul>
+  </section>
+
+<!-- /.sidebar -->
+</aside>
+<aside class="control-sidebar control-sidebar-dark">
+<div class="tab-content">
+  <div class="tab-pane" id="control-sidebar-home-tab">
+  </div>
+</div>
+</aside>

@@ -1,0 +1,27 @@
+<% include ../partials/header %>
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+<!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <br>
+    <ul class="sidebar-menu" data-widget="tree" id="halo">
+      <li <% if (title ==='sales' || title ==='purchase') {%> class="active treeview" <%}%>>
+        <a href="/dashboard_sales">
+          <i class="fa fa-home"></i> <span>Home</span>
+        </a>
+      </li>
+      <hr>
+      <!-- <li <% if (title ==='sales-item') {%> class="active"<%}%>><a href="/sales_item"><i class="fa fa-archive"></i><span>Products</span></a></li> -->
+      <li><a href="#"><i class="fa fa-cart-plus"></i><span>Sales Order</span></a></li>
+      <li><a href="#"><i class="fa  fa-truck"></i><span>Sales Return</span></a></li>
+    </ul>
+  </section>
+
+<!-- /.sidebar -->
+</aside>
+<aside class="control-sidebar control-sidebar-dark">
+<div class="tab-content">
+  <div class="tab-pane" id="control-sidebar-home-tab">
+  </div>
+</div>
+</aside>

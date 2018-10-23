@@ -1,0 +1,84 @@
+<% include ../partials/header %>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <br>
+        <ul class="sidebar-menu" data-widget="tree" id="halo">
+          <li <% if (title ==='sales' || title ==='purchase') {%> class="active treeview" <%}else{%> class="treeview" <%}%>>
+            <a href="#">
+              <i class="fa fa-home"></i> <span>Home</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li  <% if (title ==='sales') {%> class="active"<%}%>><a href="/dashboard_sales"> Dashboard Sales</a></li>
+              <li <% if (title ==='md') {%> class="active"<%}%>><a href="/dashboard_merchandising"> Dashboard Merchandising</a></li>
+              <li <% if (title ==='pos') {%> class="active"<%}%>><a href="/dashboard_pos"> Dashboard Point Of Sales</a></li>
+            </ul>
+          </li>
+          <hr>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dollar"></i>
+            <span>Sales</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <!-- <li><a href="/sales_item">  Products</a></li> -->
+            <li><a href="#"> Sales Order</a></li>
+            <li><a href="#"> Sales Returns</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-truck"></i>
+            <span>Marchandising</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"> Item Card</a></li>
+            <li><a href="#"> Item SKU</a></li>
+            <li><a href="#"> Replenishment</a></li>
+            <li><a href="#"> Purchase Order</a></li>
+          </ul>
+        </li>
+        <li><a href="#"><i class="fa fa-suitcase"></i> <span>Point Of Sales</span></a></li>
+        <hr>
+        <li <% if (title ==='company' || title ==='department' || title ==='role' || title ==='userprofile') {%> class="active treeview" <%}else{%> class="treeview" <%}%>>
+          <a href="#">
+            <i class="fa fa-cog"></i>
+            <span>Settings</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <nav class="treeview-menu">
+              <li <% if (title ==='company') {%> class="active"<%}%>><a href="/settings/company">Company</a></h4></li>
+              <li <% if (title ==='department') {%> class="active"<%}%>><a href="/settings/department"></i> Department</a></li>
+              <li<% if (title ==='role') {%> class="active"<%}%>><a href="/settings/role"> Role</a></li>
+              <li <% if (title ==='userprofile') {%> class="active"<%}%>><a href="/settings/userprofile"> User Profile</a></li>
+          </nav>
+        </li>
+        </ul>
+      </section>
+
+    <!-- /.sidebar -->
+    </aside>
+	    <aside class="control-sidebar control-sidebar-dark">
+	    <div class="tab-content">
+	      <div class="tab-pane" id="control-sidebar-home-tab">
+	      </div>
+	    </div>
+    </aside>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>

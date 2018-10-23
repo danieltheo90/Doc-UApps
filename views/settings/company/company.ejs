@@ -1,0 +1,85 @@
+<% include ./partials/navbar %>
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Setting
+      <small>Company</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="/welcome" data-toggle="tooltip" title="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Company</li>
+    </ol>
+    <br>
+        <% if(error && error.length > 0) { %>
+          <div class="alert alert-danger alert-dismissable fade in">
+            <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+            </button>
+            <p><%=error %></p>
+          </div>
+        <% } %>
+        <% if(success && success.length > 0) { %>
+          <div class="alert alert-warning alert-dismissable fade in">
+            <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+            </button><p><%= success %>
+          </span></div>
+        <% } %>
+
+    <div class="box box-default">
+      <div class="box-body">
+        <div class="box-header">
+          <h3 class="box-title">Data Company</h3>
+          <% if (title ==='company') {}%>
+          <a href="/settings/addcompany" type="button" class="btn btn-primary pull-right" aria-pressed="false" autocomplete="off" data-toggle="tooltip" title="Add New Company"><span class="glyphicon glyphicon-plus"></span>Add</a><hr>
+        </div>
+          <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
+                  <tr>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                  </tr>
+              </thead>
+              <tfoot>
+                  <tr>
+                      <th>Code</th>
+                      <th>Description</th>
+                      <th>Address</th>
+                      <th>Action</th>
+                  </tr>
+              </tfoot>
+              <tbody>
+                <% company.forEach(function(newCompany){ %>
+                  <tr>
+                      <% if (title ==='company') {}%>
+                      <td><a href="/settings/viewcompany/<%=newCompany.id%>" data-toggle="tooltip" title="Show <%= newCompany.description %>"><%= newCompany.code %></td>
+                      <td><%= newCompany.description %></a></td>
+                      <td><%- newCompany.address %></td>
+                      <td>
+                        <form action="/settings/delete-company/<%=newCompany.id%>?_method=DELETE" method="post" id="delete-form">
+                          <a href="/settings/edit-company/<%=newCompany.id%>" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Edit Data"><span class="glyphicon glyphicon-pencil"></span></a>
+
+                          <input type="hidden" name="_method" value="DELETE">
+                          <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete Data"><span class="glyphicon glyphicon-remove"></span></button>
+                      </form>
+                      </td>
+                  </tr>
+                    <%});%>
+              </tbody>
+            </table>
+          </div>
+          <hr>
+        </div>
+      </div>
+  </section>
+</div>
+
+<% include ./partials/footer %>
+<% include ./partials/datatables %>

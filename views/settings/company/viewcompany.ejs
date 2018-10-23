@@ -1,0 +1,99 @@
+<% include ./partials/navbar %>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Setting
+        <small>More Information Company</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/welcome" data-toggle="tooltip" title="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/settings/company" data-toggle="tooltip" title="Company">Company</a></li>
+        <li class="active">More Information Company</li>
+      </ol>
+      <br>
+
+      <div class="col-md-7">
+        <div class="box box-default">
+          <div class="box-body">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-spinner margin-r-5"></i>Information Company</h3>
+            </div>
+            <div class="box-body">
+              <strong><i class="fa fa-caret-right margin-r-5"></i> Code Company</strong>
+              <p class="text-muted">
+                <%= company.code %>
+              </p>
+              <hr>
+              <strong><i class="fa fa-caret-right margin-r-5"></i> Description</strong>
+              <p class="text-muted">
+                <%= company.description %>
+              </p>
+              <hr>
+              <strong><i class="fa fa-caret-right margin-r-5"></i> No.Telphone</strong>
+              <p class="text-muted">
+                <%= company.phone %>
+              </p>
+              <hr>
+              <strong><i class="fa fa-caret-right margin-r-5"></i> Address</strong>
+              <p class="text-muted">
+                <%- company.address %>
+              </p>
+              <hr>
+              <strong><i class="fa fa-caret-right margin-r-5"></i> Address 2</strong>
+              <p class="text-muted">
+                <%- company.address1 %>
+              </p>
+              <hr>
+            </div>
+          </div>
+        </div>
+        </div>
+          <div class="col-md-5">
+            <div class="box box-info">
+              <div class="box-body">
+                <div class="box-header with-border">
+                  <h3 class="box-title"><i class="fa fa-spinner margin-r-5"></i>VAT</h3>
+                </div>
+                <div class="box-body">
+                  <strong><i class="fa fa-caret-right margin-r-5"></i> VAT Registration</strong>
+                  <p class="text-muted">
+                    <%= company.vatregistration %>
+                  </p>
+                  <hr>
+                  <strong><i class="fa fa-caret-right margin-r-5"></i> VAT Name</strong>
+                  <p class="text-muted">
+                    <%= company.vatname %>
+                  </p>
+                  <hr>
+                  <strong><i class="fa fa-caret-right margin-r-5"></i> VAT Address</strong>
+                  <p class="text-muted">
+                    <%- company.vataddress %>
+                  </p>
+                  <hr>
+                  <strong><i class="fa fa-caret-right margin-r-5"></i> VAT Address 2</strong>
+                  <p class="text-muted">
+                    <%- company.vataddress1 %>
+                  </p>
+                  <hr>
+                  <strong><i class="fa fa-caret-right margin-r-5"></i> VAT Invoice Authorized Name</strong>
+                  <p class="text-muted">
+                    <%- company.vatinvoiceauthorizedname %>
+                  </p>
+                  <hr>
+                  <strong><i class="fa fa-caret-right margin-r-5"></i> VAT Invoice Authorized Position</strong>
+                  <p class="text-muted">
+                    <%= company.vatinvoiceauthorizedposition %>
+                  </p>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <section>
+</div>
+
+<% include ./partials/footer %>

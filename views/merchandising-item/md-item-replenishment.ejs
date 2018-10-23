@@ -1,0 +1,267 @@
+<% include ./partials/navbar_md %>
+<style>
+.input1{
+  font:  bold 12px arial, sans-serif;
+  border-bottom: none;
+  border-left:none;
+  border-right:none;
+  border-top:none;
+}
+</style>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      List Item Card Replenishment & Forecast
+      <small>Item</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="/welcome" data-toggle="tooltip" title="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Item</li>
+    </ol>
+  </section>
+
+    <div>
+      <% if(error && error.length > 0) { %>
+        <div class="alert alert-danger alert-dismissable fade in">
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+          </button><p><%=error %></p></div>
+      <% } %>
+      <% if(success && success.length > 0) { %>
+        <div class="alert alert-warning alert-dismissable fade in">
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+          </button><p><%= success %>
+        </span></div>
+      <% } %>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Box Comment -->
+        <div class="box box-widget">
+          <div class="box-header with-border">
+            <p class="box-title" style="width:90%;"><input class="form-control input1" id="current_filter" style="background-color:white;" disabled></p>
+            <div class="pull-right">
+              <button class="btn btn-primary btn-sm export-excel" data-toggle="tooltip" title="Export to Excel"><span class="fa  fa-file-excel-o"></span></button>
+              <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+            </div>
+          </div>
+          <div class="box-body">
+           <form method="GET" action="/merchandising_item/item_card_replenishment/" _lpchecked="1" id="form-id"  onsubmit="myFunction()">
+             <div class="box-body no-padding">
+               <table class="table table-condensed" style="width:100%;">
+                 <tr>
+                  <th class="bg-default" style="width:25%;">Company:
+                    <select name="company" class="form-control select2 allfilters">
+                      <option selected></option>
+                      <% if(company.length > 0) { %>
+                      <% company.forEach(function(newcompany){ %>
+                        <option value="<%= newcompany.code %>"><%= newcompany.code %></option>
+                      <%});%>
+                      <%}%>
+                    </select>
+                  </th>
+                  <th class="bg-default" style="width:25%;">Department:
+                    <select name="dept" class="form-control select2 allfilters">
+                      <option selected></option>
+                      <% if(dept.length > 0) { %>
+                      <% dept.forEach(function(newdept){ %>
+                        <option value="<%= newdept.code %>"><%= newdept.code %></option>
+                      <%});%>
+                      <%}%>
+                    </select>
+                  </th>
+                    <th class="bg-default" style="width:25%;">Category:
+                      <select name="item_category" class="form-control select2 allfilters">
+                        <option selected></option>
+                        <% if(category.length > 0) { %>
+                        <% category.forEach(function(categories){ %>
+                          <option value="<%= categories.Code %>"><%= categories.Code %></option>
+                        <%});%>
+                        <%}%>
+                      </select>
+                    </th>
+                    <th class="bg-default" style="width:25%;">Brand:
+                       <select name="item_brand" class="form-control select2 allfilters">
+                         <option selected></option>
+                         <% if(brand.length > 0) { %>
+                         <% brand.forEach(function(brands){ %>
+                           <option value="<%= brands.Code %>"><%= brands.Code %></option>
+                         <%});%>
+                         <%}%>
+                       </select>
+                     </th>
+                  </tr>
+                  <tr>
+                     <th class="bg-default" style="width:10%;">Item No:
+                         <input type="text" name="no" class="form-control allfilters" placeholder="No.Item">
+                     </th>
+                     <th class="bg-default" style="width:20%;">Description:
+                       <input type="text" name="description" class="form-control allfilters" placeholder="Description">
+                     </th>
+                     <th></th>
+                    <th><br>
+                      <div class="btn-group pull-right">
+                        <button class="btn btn-primary" id="submit"><span class="fa fa-search"></span></button>
+                      </div>
+                    </th>
+                    </tr>
+                </table>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <!-- Left col -->
+      <section class="col-lg-12 connectedSortable">
+        <!-- Custom tabs (Charts with tabs)-->
+        <div class="nav-tabs-custom">
+          <!-- Tabs within a box -->
+          <ul class="nav nav-tabs pull-right">
+            <li class="active"><a href="#tab_1" data-toggle="tab">General</a></li>
+            <li><a href="#tab_2" data-toggle="tab">Spesification</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab_1">
+              <div class="box-body table-responsive no-padding">
+                <table id="example1" class="table table-bordered table-striped" align="center">
+                  <thead>
+                    <tr>
+                      <th>Code</th>
+                      <th>Variant</th>
+                      <th>Description</th>
+                      <th>Description 2</th>
+                      <th>UOM</th>
+                      <th>Sales Class</th>
+                      <th>Lead Time</th>
+                      <th>Target SCD</th>
+                      <th>Reorder SCD</th>
+                      <th>Replenishment Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if(item.length > 0) { %>
+                      <% item.forEach(function(items){ %>
+                    <tr>
+                      <td><%= items.No%></td>
+                      <td><%= items.VariantCode %></td>
+                      <td><%= items.Description %></td>
+                      <td><%= items.Description2 %></td>
+                      <td><%= items.UOM %></td>
+                      <td></td>
+                      <td><%= items.LeadTime %></td>
+                      <td><%= items.SCD %></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <%});%>
+                    <%}%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- /.tab-pane -->
+            <div class="tab-pane" id="tab_2">
+              <div class="box-body table-responsive no-padding">
+                <table id="example3" class="table table-bordered table-striped" align="center">
+                  <thead>
+                    <tr>
+                      <th>Code</th>
+                      <th>Variant</th>
+                      <th>Description</th>
+                      <th>Description 2</th>
+                      <th>UOM</th>
+                      <th>1</th>
+                      <th>2</th>
+                      <th>3</th>
+                      <th>4</th>
+                      <th>5</th>
+                      <th>6</th>
+                      <th>7</th>
+                      <th>8</th>
+                      <th>9</th>
+                      <th>10</th>
+                      <th>11</th>
+                      <th>12</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if(item.length > 0) { %>
+                      <% item.forEach(function(items){ %>
+                    <tr>
+                      <td><%= items.No%></td>
+                      <td><%= items.VariantCode %></td>
+                      <td><%= items.Description %></td>
+                      <td><%= items.Description2 %></td>
+                      <td><%= items.UOM %></td>
+                      <td><%= items.Januari %></td>
+                      <td><%= items.Februari %></td>
+                      <td><%= items.Maret %></td>
+                      <td><%= items.April %></td>
+                      <td><%= items.Mei %></td>
+                      <td><%= items.Juni %></td>
+                      <td><%= items.Juli %></td>
+                      <td><%= items.Agustus %></td>
+                      <td><%= items.September %></td>
+                      <td><%= items.Oktober %></td>
+                      <td><%= items.November %></td>
+                      <td><%= items.Desember %></td>
+                    </tr>
+                    <%});%>
+                    <%}%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+</div>
+
+<script>
+  $('.export-excel').click(function() {
+      url = window.location.search.replace("?", '');
+      window.location.href = "http://localhost:8000/merchandising_item/item_card_replenishment/excel/?"+url;
+  });
+
+
+function currentFilter(variable){
+  var s = document.getElementById(variable);
+  s.value = window.location.search.replace("?company=", '')
+  .replace("&dept=",' / ')
+  .replace("&item_category=",' / ')
+  .replace("&item_brand=",' / ')
+  .replace("&description=",' / ')
+  .replace("&no=",' / ');
+}
+currentFilter("current_filter");
+
+function myFunction()
+{
+    var myForm = document.getElementById('form-id');
+    var allInputs = myForm.getElementsByClassName('allfilters');
+    var input, i;
+
+    for(i = 0; input = allInputs[i]; i++) {
+        if(input.getAttribute('name')&& !input.value) {
+            input.setAttribute('name', '');
+        }
+    }
+}
+
+
+</script>
+
+<% include ./partials/footer %>
+<% include ./partials/datatables %>

@@ -1,0 +1,140 @@
+
+<% include ./partials/navbar_sales %>
+<link rel="stylesheet" href="/stylesheets/md_show.css">
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+
+    <h1>
+      List Product Catalog With Price
+      <small>Item</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="/welcome" data-toggle="tooltip" title="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Item</li>
+    </ol>
+  </section>
+
+    <div>
+      <% if(error && error.length > 0) { %>
+        <div class="alert alert-danger alert-dismissable fade in">
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+          </button><p><%=error %></p></div>
+      <% } %>
+      <% if(success && success.length > 0) { %>
+        <div class="alert alert-warning alert-dismissable fade in">
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+          </button><p><%= success %>
+        </span></div>
+      <% } %>
+    </div>
+<br>
+
+<section class="content">
+  <div class="row">
+    <!-- Left col -->
+    <div class="col-md-6">
+  <div>
+      <% if(item.length > 0) { %>
+      <% item.forEach(function(items){ %>
+        <% for(var i=1; i < 5; i++) { %>
+      <div class="mySlides">
+        <img class="img" src="/img/<%= company_name %>/item/<%= item_no %>[<%=i%>].jpg" style="width:100%;height:350px;" onerror="this.src='/img/noimage.png'">
+      </div>
+        <%}%>
+      <%});%>
+      <%}%>
+
+      <div class="caption-container">
+        <p id="caption"></p>
+      </div>
+
+      <div class="rows">
+        <% if(item.length > 0) { %>
+        <% item.forEach(function(items){ %>
+          <% for(var i=1; i < 5; i++) { %>
+        <div class="column">
+          <img class="demo cursor" src="/img/<%= company_name %>/item/<%= item_no %>[<%=i%>].jpg" onerror="this.src='/img/noimage.png'" style="width:100%;height:80px;" onclick="currentSlide([<%=i%>])" alt="">
+        </div>
+        <%}%>
+        <%});%>
+        <%}%>
+      </div>
+    <!-- /.box-footer -->
+  </div>
+  </div>
+
+  <div class="col-md-5">
+  <div class="box box-widget">
+    <div class="box-header with-border">
+      <h3 class="box-title">Recently Products</h3>
+    </div>
+    <!-- /.box-header -->
+    <% if(item.length > 0) { %>
+      <% item.forEach(function(items){ %>
+    <div class="box-body">
+      <ul class="products-list product-list-in-box">
+        <li class="item">
+            <span class="label label-info pull-right" style="font-size:14px;">IDR. <%= items.price.toLocaleString() %></span><br>
+          <a href="javascript:void(0)" class="product-title">Item No.</a>
+          <div class="product-info">
+            <span class="product-description"><%= items.No %></span>
+          </div>
+        </li>
+        <li class="item">
+          <a href="javascript:void(0)" class="product-title">Name</a>
+          <div class="product-info">
+            <span class="product-description"><%= items.Description %>&nbsp <%= items.Description2 %></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer text-center">
+      <a href="javascript:void(0)" class="uppercase">Stock Tersedia : <%= items.actualStock %> / <%= items.UOM %></a>
+    </div>
+    <% }); %>
+   <% } %>
+    <!-- /.box-footer -->
+  </div>
+  </div>
+  </div>
+
+</section>
+
+</div>
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+</script>
+  <% include ./partials/footer %>

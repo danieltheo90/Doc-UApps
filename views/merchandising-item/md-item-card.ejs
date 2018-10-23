@@ -1,0 +1,259 @@
+<% include ./partials/navbar_md %>
+<style>
+.input1{
+  font:  bold 12px arial, sans-serif;
+  border-bottom: none;
+  border-left:none;
+  border-right:none;
+  border-top:none;
+}
+</style>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      List Item Card & Spesification
+      <small>Item</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="/welcome" data-toggle="tooltip" title="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Item</li>
+    </ol>
+  </section>
+
+    <div>
+      <% if(error && error.length > 0) { %>
+        <div class="alert alert-danger alert-dismissable fade in">
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+          </button><p><%=error %></p></div>
+      <% } %>
+      <% if(success && success.length > 0) { %>
+        <div class="alert alert-warning alert-dismissable fade in">
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+          </button><p><%= success %>
+        </span></div>
+      <% } %>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Box Comment -->
+        <div class="box box-widget">
+          <div class="box-header with-border">
+            <h3 class="box-title" style="width:80%;">  <input class="form-control input1" id="current_filter" style="background-color:white;" disabled></h3>
+            <div class="pull-right">
+              <button class="btn btn-primary btn-sm export-excel" data-toggle="tooltip" title="Export to Excel"><span class="fa  fa-file-excel-o"></span></button>
+              <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fa fa-minus"></i></button>
+            </div>
+          </div>
+          <div class="box-body">
+           <form method="GET" action="/merchandising_item/merchandising_item_card/" _lpchecked="1" id="form-id"  onsubmit="myFunction()">
+             <div class="box-body no-padding">
+               <table class="table table-condensed" style="width:100%;">
+                 <tr>
+                  <th class="bg-default" style="width:25%;">Company:
+                    <select name="company" class="form-control select2 allfilters">
+                      <option selected></option>
+                      <% if(company.length > 0) { %>
+                      <% company.forEach(function(newcompany){ %>
+                        <option value="<%= newcompany.code %>"><%= newcompany.code %></option>
+                      <%});%>
+                      <%}%>
+                    </select>
+                  </th>
+                    <th class="bg-default" style="width:25%;">Category:
+                      <select name="item_category" class="form-control select2 allfilters">
+                        <option selected></option>
+                        <% if(category.length > 0) { %>
+                        <% category.forEach(function(categories){ %>
+                          <option value="<%= categories.Code %>"><%= categories.Code %></option>
+                        <%});%>
+                        <%}%>
+                      </select>
+                    </th>
+                     <th class="bg-default" style="width:25%;">Brand:
+                      <select name="item_brand" class="form-control select2 allfilters">
+                        <option selected></option>
+                        <% if(brand.length > 0) { %>
+                        <% brand.forEach(function(brands){ %>
+                          <option value="<%= brands.Code %>"><%= brands.Code %></option>
+                        <%});%>
+                        <%}%>
+                      </select>
+                    </th>
+                    <th class="bg-default" style="width:25%;">Description:
+                      <input type="text" name="description" class="form-control allfilters" placeholder="Description">
+                    </th>
+                  </tr>
+                </tr>
+                  <th class="bg-default" style="width:25%;">Item No:
+                      <input type="text" name="no" class="form-control allfilters" placeholder="No.Item">
+                  </th>
+                  <th></th>
+                  <th></th>
+                     <th><br>
+                      <div class="btn-group pull-right">
+                        <button class="btn btn-primary" id="submit"><span class="fa fa-search"></span></button>
+                      </div>
+                    </th>
+                  </tr>
+                </table>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Left col -->
+      <section class="col-lg-12 connectedSortable">
+        <!-- Custom tabs (Charts with tabs)-->
+        <div class="nav-tabs-custom">
+          <!-- Tabs within a box -->
+            <ul class="nav nav-tabs pull-right">
+              <li class="active"><a href="#tab_1" data-toggle="tab">General</a></li>
+              <li><a href="#tab_2" data-toggle="tab">Spesification</a></li>
+            </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab_1">
+              <div class="box-body table-responsive no-padding">
+                <table id="example1" class="table table-bordered table-striped" align="center">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th colspan="4">
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        Item Category
+                      </th>
+                      <th colspan="3">
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        Customer Category
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>Code</th>
+                      <th>Barcode</th>
+                      <th>Variant</th>
+                      <th>Description</th>
+                      <th>Description 2</th>
+                      <th>UOM</th>
+                      <th>Brand</th>
+                      <th>Division</th>
+                      <th>Category</th>
+                      <th>Group</th>
+                      <th>Interior Furniture</th>
+                      <th>Advertising</th>
+                      <th>Aluminium</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if(item.length > 0) { %>
+                      <% item.forEach(function(items){ %>
+                    <tr>
+                      <td><%= items.No_%></td>
+                      <td><%= items.Barcode %></td>
+                      <td><%= items.VariantCode %></td>
+                      <td><%= items.Description %></td>
+                      <td><%= items.Description2 %></td>
+                      <td><%= items.UOM %></td>
+                      <td><%= items.ManufactureCode %></td>
+                      <td><%= items.DivisionCode %></td>
+                      <td><%= items.ItemCategory %></td>
+                      <td><%= items.ProductGroup %></td>
+                      <td><%= items.InteriorFurniture %></td>
+                      <td><%= items.Advertising %></td>
+                      <td><%= items.Aluminium %></td>
+                    </tr>
+                    <%});%>
+                    <%}%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- /.tab-pane -->
+            <div class="tab-pane" id="tab_2">
+              <div class="box-body table-responsive no-padding">
+                <table id="example3" class="table table-bordered table-striped" align="center">
+                  <thead>
+                    <tr>
+                      <th>Code</th>
+                      <th>Variant</th>
+                      <th>Description</th>
+                      <th>Description 2</th>
+                      <th>UOM</th>
+                      <th>Gross Weight</th>
+                      <th>Image</th>
+                      <th>Spesification On</th>
+                      <th>Feature</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if(item.length > 0) { %>
+                      <% item.forEach(function(itemss){ %>
+                    <tr>
+                      <td><%= itemss.No_%></td>
+                      <td><%= itemss.VariantCode %></td>
+                      <td><%= itemss.Description %></td>
+                      <td><%= itemss.Description2 %></td>
+                      <td><%= itemss.UOM %></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <%});%>
+                    <%}%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+</div>
+<script>
+  $('.export-excel').click(function() {
+      url = window.location.search.replace("?", '');
+      window.location.href = "http://localhost:8000/merchandising_item/merchandising_item_card/excel/?"+url;
+  });
+
+function currentFilter(variable){
+  var s = document.getElementById(variable);
+  s.value = window.location.search.replace("?company=", '')
+  .replace("&item_category=",' / ')
+  .replace("&item_brand=",' / ')
+  .replace("&description=",' / ')
+  .replace("&no=",' / ');
+}
+currentFilter("current_filter");
+function myFunction()
+{
+    var myForm = document.getElementById('form-id');
+    var allInputs = myForm.getElementsByClassName('allfilters');
+    var input, i;
+
+    for(i = 0; input = allInputs[i]; i++) {
+        if(input.getAttribute('name')&& !input.value) {
+            input.setAttribute('name', '');
+        }
+    }
+}
+
+
+</script>
+
+<% include ./partials/footer %>
+<% include ./partials/datatables %>

@@ -1,0 +1,42 @@
+<% include ./partials/navbar_md %>
+<link rel="stylesheet" href="/stylesheets/main1.css">
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Dashboard MD
+        <small>Control panel</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/welcome"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+
+      <div>
+        <% if(error && error.length > 0) { %>
+          <% error.forEach(function(errors) { %>
+            <div class="alert alert-danger">
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+              </button>
+            <p><%=errors.message %><%=errors.msg %></p>
+          <% }); %>
+        <% } %>
+        <% if(success && success.length > 0) { %>
+          <div class="alert alert-success"><p><%= success %>
+            <button type="button" class="close" data-dismiss="alert">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+          </p></div>
+        <% } %>
+      </div>
+  </div>
+
+</aside>
+ <% include ./partials/footer %>
+
+ <script src='https://cdnjs.cloudflare.com/ajax/libs/mixitup/2.1.11/jquery.mixitup.js'></script>
+ <script src="/scripts/index1.js"></script>

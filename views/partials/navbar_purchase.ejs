@@ -1,0 +1,37 @@
+<% include ../partials/header %>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <br>
+        <ul class="sidebar-menu" data-widget="tree" id="halo">
+          <li <% if (title ==='sales' || title ==='purchase') {%> class="active treeview" <%}%>>
+            <a href="/dashboard_purchase">
+              <i class="fa fa-home"></i> <span>Home</span>
+              <!--<span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>-->
+            </a>
+            <!-- <ul class="treeview-menu">
+              <li <% if (title ==='purchase') {%> class="active"<%}%>><a href="/dashboard_purchase"> Dashboard Purchase</a></li>
+            </ul> -->
+          </li>
+          <hr>
+          <!-- <li<% if (title ==='purchase-item') {%> class="active"<%}%> ><a href="/purchase_item" ><i class="fa fa-archive" ></i><span>Products</span></a></li> -->
+          <!-- <li<% if (title ==='purchase-item-general') {%> class="active"<%}%> ><a href="/purchase_item/item_card_general" ><i class="fa  fa-puzzle-piece" ></i><span>Item Card General</span></a></li> -->
+          <!-- <li<% if (title ==='purchase-item-purchasing') {%> class="active"<%}%> ><a href="/purchase_item/item_card_purchasing" ><i class="fa fa-pencil-square" ></i><span>Item Card Purchasing</span></a></li> -->
+          <!-- <li<% if (title ==='purchase-item-replenishment') {%> class="active"<%}%> ><a href="/purchase_item/item_card_replenishment" ><i class="fa fa-qrcode" ></i><span>Item Card Replenishment</span></a></li> -->
+          <li><a href="#"><i class="fa fa-cart-plus"></i><span>Purchase Order</span></a></li>
+          <li><a href="#"><i class="fa  fa-truck"></i><span>Purchase Return</span></a></li>
+          <li></li>
+
+        </ul>
+      </section>
+    <!-- /.sidebar -->
+    </aside>
+    <aside class="control-sidebar control-sidebar-dark">
+    <div class="tab-content">
+      <div class="tab-pane" id="control-sidebar-home-tab">
+      </div>
+    </div>
+    </aside>

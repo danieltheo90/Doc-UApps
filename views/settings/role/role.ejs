@@ -1,0 +1,84 @@
+<% include ./partials/navbar %>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Setting
+      <small>Role User</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="/welcome" data-toggle="tooltip" title="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Role User</li>
+    </ol>
+  <br>
+  <div>
+    <% if(error && error.length > 0) { %>
+      <div class="alert alert-danger alert-dismissable fade in">
+        <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button><p><%=error %></p></div>
+    <% } %>
+    <% if(success && success.length > 0) { %>
+      <div class="alert alert-warning alert-dismissable fade in">
+        <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button><p><%= success %>
+      </span></div>
+    <% } %>
+  </div>
+  <div class="box box-default">
+    <div class="box-body">
+      <div class="box-header">
+          <h3 class="box-title">Data Role User</h3>
+          <% if (title ==='role') {}%>
+          <a href="/settings/add-role" type="button" class="btn btn-primary pull-right" aria-pressed="false" autocomplete="off" data-toggle="tooltip" title="Add New Role User">
+            <span class="glyphicon glyphicon-plus"></span>Add
+          </a>
+        <hr>
+      </div>
+      <div class="box-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Description</th>
+                  <th>Action</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+            <tbody>
+              <% role.forEach(function(newRole){ %>
+                <tr>
+                    <td><a  href="/settings/viewrole/<%=newRole.id%>" data-toggle="tooltip" title="Show <%= newRole.code %>"><%= newRole.code %></td>
+                    <td><%= newRole.description %></td>
+                    <td>
+                    <%  if ( newRole.code  !== 'administrator'){%>
+                      <form action="/settings/delete-role/<%=newRole.id%>?_method=DELETE" method="post" id="delete-form">
+                        <% if (title ==='role') {}%>
+                        <a href="/settings/edit-role/<%=newRole.id%>" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Edit Data"><span class="glyphicon glyphicon-pencil"></span></a>
+
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete Data"><span class="glyphicon glyphicon-remove"></span></button>
+                    </form>
+                  <% } %>
+                    </td>
+                </tr>
+                <%});%>
+            </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<% include ./partials/footer %>
+<% include ./partials/datatables %>

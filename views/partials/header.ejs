@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>sentral tukang indonesia</title>
+      <link rel="icon" href="/img/logo1.png">
+      <link rel="stylesheet" href="/css_dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/css_dashboard/bower_components/font-awesome/css/font-awesome.min.css">
+
+      <link rel="stylesheet" href="/css_dashboard/bower_components/select2/dist/css/select2.min.css">
+      <link rel="stylesheet" href="/css_dashboard/dist/css/AdminLTE.min.css">
+      <link rel="stylesheet" href="/css_dashboard/dist/css/skins/_all-skins.min.css">
+
+      <script src="/css_dashboard/bower_components/jquery/dist/jquery.min.js"></script>
+      <script src="/css_dashboard/bower_components/jquery-ui/jquery-ui.min.js"></script>
+
+      <script src="/css_dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="/css_dashboard/dist/js/adminlte.min.js"></script>
+      <script src="/css_dashboard/dist/js/pages/dashboard.js"></script>
+      <script src="/css_dashboard/dist/js/demo.js"></script>
+      <script src="/css_dashboard/bower_components/select2/dist/js/select2.full.min.js"></script>
+
+
+      <style media="screen">
+        #return-to-top {
+          z-index: 99;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background: rgb(0, 0, 0);
+          background: rgba(0, 0, 0, 0.7);
+          width: 50px;
+          height: 50px;
+          display: block;
+          text-decoration: none;
+          -webkit-border-radius: 35px;
+          -moz-border-radius: 35px;
+          border-radius: 100%;
+          display: none;
+          -webkit-transition: all 0.3s linear;
+          -moz-transition: all 0.3s ease;
+          -ms-transition: all 0.3s ease;
+          -o-transition: all 0.3s ease;
+          transition: all 0.3s ease;
+        }
+        #return-to-top i {
+            color: #fff;
+            margin: 0;
+            position: relative;
+            left: 17px;
+            top: 14px;
+            font-size: 19px;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+        #return-to-top:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        #return-to-top:hover i {
+            color: #fff;
+            top: 5px;
+        }
+      </style>
+
+
+  </head>
+
+<body class="hol-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+      <a href="/welcome" class="logo">
+        <span class="logo-mini"><b>S</b>TI</span>
+        <span class="logo-lg"><b>SENTRAL</b>TUKANG</span>
+      </a>
+      <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="/img/user.png" class="user-image" alt="User Image">
+                <% if(!currentUser){ %>
+                  <% } else { %>
+                <span class="hidden-xs">Signed In As <%= currentUser.username %></span>
+                <% } %>
+              </a>
+              <ul class="dropdown-menu">
+            </li>
+                <li class="user-footer">
+                  <div class="pull-right">
+                    <% if(!currentUser){ %>
+                      <% } else { %>
+                    <a href="/accounts/logout" class="btn btn-default btn-flat">Sign out</a>
+                      <% } %>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <a href="javascript:" id="return-to-top"><i class="fa  fa-arrow-circle-up"></i></a>
+
+    <script>
+        $(window).scroll(function() {
+            if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+                $('#return-to-top').fadeIn(200);    // Fade in the arrow
+            } else {
+                $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+            }
+        });
+        $('#return-to-top').click(function() {      // When arrow is clicked
+            $('body,html').animate({
+                scrollTop : 0                       // Scroll to top of body
+            }, 500);
+        });
+</script>
